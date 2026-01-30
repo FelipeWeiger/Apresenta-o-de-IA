@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(ls -la \"c:\\\\Users\\\\Felipe Weiger\\\\OneDrive\\\\Cursor projects\\\\17-Apresentação de IA\\\\logos\"\" 2>nul || dir \"c:UsersFelipe WeigerOneDriveCursor projects17-Apresentação de IAlogos\"\")",
+      "Bash(python3:*)",
+      "Bash(for f in langflow.png flowise.png synthesia.png bolt.png relevance.png)",
+      "Bash(do head -c 4 \"$f\")",
+      "Bash(xxd:*)",
+      "Bash(done)",
+      "Bash(powershell -Command:*)"
+    ]
+  }
+}

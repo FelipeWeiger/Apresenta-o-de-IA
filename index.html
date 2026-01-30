@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA na Prática para Empresas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* === ICON HELPER === */
+        .ic { font-size: 1em; vertical-align: middle; line-height: 1; }
+        /* === BRAND TOKENS === */
+        :root {
+            --green: #3ECF8E;
+            --green-hover: #2EB872;
+            --black: #000000;
+            --bg: #0A0A0A;
+            --white: #FFFFFF;
+            --text-body: rgba(255,255,255,0.8);
+            --text-muted: rgba(255,255,255,0.45);
+            --border: rgba(255,255,255,0.08);
+            --surface: rgba(255,255,255,0.04);
+            --surface-hover: rgba(255,255,255,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; overflow: hidden; background: #000; }
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* === 16:9 CONTAINER === */
+        .presentation {
+            width: 100vw;
+            height: 56.25vw; /* 16:9 */
+            max-height: 100vh;
+            max-width: 177.78vh; /* 16:9 inverse */
+            position: relative;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        /* === SLIDES === */
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+            color: var(--white);
+        }
+        .slide.active { opacity: 1; visibility: visible; }
+
+        /* === NAVIGATION === */
+        .navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            z-index: 100;
+        }
+        .nav-btn {
+            background: var(--surface);
+            color: var(--text-body);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .nav-btn:hover { background: var(--green); border-color: var(--green); color: var(--black); }
+        .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; background: var(--surface); border-color: var(--border); color: var(--text-muted); }
+        .nav-btn:disabled:hover { background: var(--surface); color: var(--text-muted); }
+        .slide-counter { color: var(--text-muted); font-size: 0.8rem; min-width: 50px; text-align: center; }
+
+        .indicators {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 100;
+        }
+        .indicator {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .indicator.active { background: var(--green); }
+        .indicator:hover { background: var(--green); }
+
+        /* === LAYOUT === */
+        .slide-header {
+            width: 100%;
+            padding: 14px 80px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .slide-content {
+            flex: 1;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 80px 90px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--green);
+            letter-spacing: -0.02em;
+        }
+        .slide-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .two-col {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 48px;
+            flex: 1;
+            align-items: start;
+        }
+        .col-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        /* === FOOTER BOX === */
+        .footer-box {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            background: var(--surface);
+            color: var(--text-body);
+            border: 1px solid var(--border);
+        }
+
+        /* === LOGO CARDS === */
+        .logo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        .logo-circle {
+            width: 64px; height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: white;
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .logo-circle { font-size: 0 !important; color: transparent !important; }
+        .logo-circle.fallback { color: white !important; }
+        .logo-circle.fallback { font-size: 1.4rem !important; }
+        .logo-circle.fallback[style*="width:40px"] { font-size: 0.9rem !important; }
+        .logo-card img, .logo-circle img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+        .logo-name {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-body);
+            text-align: center;
+            max-width: 90px;
+        }
+        .logo-price {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        /* === FEATURE ITEMS === */
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 0;
+        }
+        .feature-icon {
+            font-size: 1.4rem;
+            width: 36px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .feature-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-body);
+        }
+
+        /* === FLOW ITEMS === */
+        .flow-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            flex-wrap: wrap;
+        }
+        .flow-step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-body);
+            white-space: nowrap;
+        }
+        .flow-arrow {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* === TIMELINE === */
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            flex: 1;
+        }
+        .timeline-card {
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+        .timeline-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        .timeline-card ul {
+            list-style: none;
+            font-size: 0.85rem;
+            line-height: 1.9;
+            color: var(--text-body);
+        }
+        .timeline-card .status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        /* === STEP CARDS === */
+        .step-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            flex: 1;
+        }
+        .step-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+        .step-card-header {
+            padding: 16px 24px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .step-card-body {
+            padding: 24px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-body);
+        }
+
+        /* === SECTION BAR === */
+        .section-bar {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* === PYRAMID === */
+        .pyramid-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex: 1;
+        }
+        .pyramid-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .autonomy-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .autonomy-arrow-line {
+            width: 2px;
+            height: 230px;
+            background: linear-gradient(to top, rgba(255,255,255,0.08), var(--green));
+            border-radius: 1px;
+        }
+        .autonomy-arrow-label {
+            font-weight: 600;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+        .pyramid-layer {
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-weight: 600;
+            font-size: 0.85rem;
+            clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);
+        }
+        .pyramid-desc {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .pyramid-desc-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .pyramid-dot {
+            width: 22px; height: 22px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        .pyramid-label {
+            font-size: 1rem;
+            color: var(--text-body);
+        }
+        .pyramid-label strong {
+            display: block;
+            font-size: 1.05rem;
+            color: var(--white);
+        }
+
+        /* === AGENT DIAGRAM === */
+        .agent-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .agent-center {
+            background: var(--green);
+            color: var(--black);
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .agent-tools {
+            display: flex;
+            gap: 12px;
+        }
+        .agent-tool {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-body);
+        }
+
+        /* === WORKFLOW DIAGRAM === */
+        .workflow-diagram {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .wf-node {
+            background: var(--surface);
+            border: 2px solid var(--green);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-body);
+        }
+        .wf-node.primary {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        /* === CENTERED LAYOUT === */
+        .centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+            padding: 80px;
+            padding-bottom: 100px;
+        }
+        .green-line {
+            width: 60px; height: 4px;
+            background: var(--green);
+            border-radius: 2px;
+            margin-bottom: 28px;
+        }
+
+        /* === CTA === */
+        .cta-box {
+            display: inline-block;
+            background: var(--green);
+            color: var(--black);
+            padding: 14px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* === MEDIA SECTION === */
+        .media-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .media-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            width: 60px;
+            flex-shrink: 0;
+        }
+
+        /* === SUMMARY LIST === */
+        .summary-list {
+            list-style: none;
+            text-align: left;
+            max-width: 600px;
+        }
+        .summary-list li {
+            padding: 10px 0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-body);
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .summary-list li::before {
+            content: '→';
+            color: var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .level-header { background: var(--green); color: var(--black); }
+
+        /* === ENHANCED VISUALS === */
+
+        /* Decorative ring for cover/closing slides */
+        .deco-ring {
+            position: absolute;
+            width: 340px; height: 340px;
+            border-radius: 50%;
+            border: 2px solid rgba(62,207,142,0.12);
+            pointer-events: none;
+        }
+        .deco-ring-2 {
+            position: absolute;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            border: 1px solid rgba(62,207,142,0.06);
+            pointer-events: none;
+        }
+
+        /* Feature mini-cards (slides 3, 4) */
+        .feature-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 16px;
+            gap: 14px;
+        }
+        .feature-icon {
+            background: rgba(62,207,142,0.1);
+            border-radius: 8px;
+            width: 36px; height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Flow arrow circles (slide 5) */
+        .flow-step {
+            background: rgba(62,207,142,0.06);
+            border: 1px solid rgba(62,207,142,0.15);
+        }
+        .flow-arrow {
+            background: var(--green);
+            color: var(--black);
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Glow effects */
+        .glow-green { box-shadow: 0 0 20px rgba(62,207,142,0.15); }
+        .glow-green-strong { box-shadow: 0 0 28px rgba(62,207,142,0.2); }
+
+        /* Agent tools enhanced (slide 7) */
+        .agent-tool {
+            border: 1px solid rgba(62,207,142,0.2);
+        }
+        .agent-center {
+            box-shadow: 0 0 24px rgba(62,207,142,0.2);
+        }
+
+        /* Workflow node glow (slide 6) */
+        .wf-node.primary {
+            box-shadow: 0 0 20px rgba(62,207,142,0.15);
+        }
+
+        /* Timeline connector (slide 8) */
+        .timeline {
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--green), rgba(62,207,142,0.08));
+            z-index: 0;
+            border-radius: 1px;
+        }
+        .timeline-card {
+            position: relative;
+            z-index: 1;
+        }
+        .timeline-card .status {
+            display: inline-block;
+            background: rgba(62,207,142,0.08);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border-top: none;
+        }
+
+        /* Media row enhancements (slide 9) */
+        .media-row {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        .media-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .media-label::before {
+            content: '';
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Step card numbers (slide 10) */
+        .step-card {
+            position: relative;
+        }
+        .step-number {
+            position: absolute;
+            top: 50px; right: 16px;
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(62,207,142,0.07);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        /* CTA glow (slide 11) */
+        .cta-box {
+            box-shadow: 0 0 30px rgba(62,207,142,0.2);
+        }
+
+        /* Chat demo (slide 3) */
+        .chat-demo {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .chat-msg {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .chat-msg .avatar {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .chat-msg .bubble {
+            padding: 10px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+        }
+        .chat-msg.user .bubble {
+            background: rgba(255,255,255,0.06);
+            color: var(--text-body);
+        }
+        .chat-msg.ai .bubble {
+            background: rgba(62,207,142,0.08);
+            border: 1px solid rgba(62,207,142,0.15);
+            color: var(--text-body);
+        }
+        .chat-msg.ai {
+            justify-content: flex-end;
+        }
+        .tag-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .tag {
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(62,207,142,0.08);
+            border: 1px solid rgba(62,207,142,0.15);
+            color: var(--green);
+        }
+
+        /* GPT cards grid (slide 4) */
+        .gpt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .gpt-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 16px 8px;
+            background: var(--surface);
+            border: 1px solid rgba(62,207,142,0.12);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .gpt-card .gpt-emoji {
+            font-size: 1.6rem;
+        }
+        .gpt-card .gpt-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-body);
+        }
+
+        /* Flow hero (slide 5) */
+        .flow-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 24px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .flow-hero .flow-step {
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .flow-hero .flow-arrow {
+            width: 32px; height: 32px;
+            font-size: 0.85rem;
+        }
+
+        /* Workflow tree (slide 6) */
+        .wf-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .wf-tree .wf-node {
+            padding: 10px 20px;
+            font-size: 0.85rem;
+        }
+        .wf-connector {
+            width: 2px;
+            height: 20px;
+            background: rgba(62,207,142,0.3);
+        }
+        .wf-branch {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            position: relative;
+        }
+        .wf-branch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 80px);
+            height: 2px;
+            background: rgba(62,207,142,0.3);
+        }
+        .wf-branch-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .wf-branch-item .wf-connector {
+            height: 16px;
+        }
+
+        /* Agent flow (slide 7) */
+        .agent-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 24px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
+        .agent-flow-step {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            color: var(--text-body);
+        }
+        .agent-flow-step.center {
+            background: var(--green);
+            color: var(--black);
+            border-color: var(--green);
+            box-shadow: 0 0 20px rgba(62,207,142,0.2);
+            padding: 12px 24px;
+            font-size: 0.95rem;
+        }
+        .agent-flow-tools {
+            display: flex;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            background: rgba(62,207,142,0.06);
+            border: 1px solid rgba(62,207,142,0.15);
+            font-size: 1.2rem;
+        }
+
+        /* === LLM FLOW DIAGRAMS === */
+        .llm-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: 24px 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .llm-flow-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .llm-flow-box {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-body);
+        }
+        .llm-flow-box.input { border-color: rgba(62,207,142,0.3); color: var(--green); }
+        .llm-flow-box.llm {
+            background: rgba(62,207,142,0.1);
+            border-color: var(--green);
+            color: var(--green);
+            font-weight: 600;
+            padding: 14px 28px;
+            font-size: 0.9rem;
+        }
+        .llm-flow-box.output { border-color: rgba(62,207,142,0.3); color: var(--green); }
+        .llm-flow-box.system {
+            background: rgba(62,207,142,0.06);
+            border-color: rgba(62,207,142,0.25);
+            color: var(--green);
+            font-size: 0.7rem;
+            padding: 6px 12px;
+            opacity: 0.85;
+        }
+        .llm-flow-arrow {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            position: relative;
+            margin: 0 4px;
+        }
+        .llm-flow-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -3px;
+            border: solid rgba(255,255,255,0.25);
+            border-width: 0 1px 1px 0;
+            padding: 3px;
+            transform: rotate(-45deg);
+        }
+        .llm-flow-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .llm-flow-connector-down {
+            width: 1px;
+            height: 16px;
+            background: rgba(62,207,142,0.3);
+        }
+
+        /* Summary dots instead of arrows */
+        .summary-list li::before {
+            content: '';
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+
+        <!-- ==================== SLIDE 1 - CAPA ==================== -->
+        <div class="slide active" data-slide="1">
+            <div class="centered" style="position:relative;">
+                <div class="deco-ring" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+                <div class="deco-ring-2" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+                <h1 style="font-size:3.2rem;font-weight:600;letter-spacing:-0.03em;margin-bottom:16px;color:var(--white);position:relative;z-index:1;">
+                    Além do ChatGPT: o que construir com <span style="color:var(--green);">Inteligência Artificial</span>
+                </h1>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 2 - PIRÂMIDE ==================== -->
+        <div class="slide" data-slide="2">
+            <div class="slide-content">
+                <div class="slide-title">5 níveis de aplicação de IA</div>
+                <div class="pyramid-container">
+                    <div class="pyramid-left">
+                        <div class="autonomy-arrow">
+                            <div style="color:var(--green);font-size:1rem;">▲</div>
+                            <div class="autonomy-arrow-line"></div>
+                            <div class="autonomy-arrow-label">Autonomia</div>
+                        </div>
+                        <div class="pyramid">
+                            <div class="pyramid-layer" style="width:130px;background:#3ECF8E;">Agentes</div>
+                            <div class="pyramid-layer" style="width:195px;background:#35b87d;">Workflows com IA</div>
+                            <div class="pyramid-layer" style="width:260px;background:#2a9466;">Automações</div>
+                            <div class="pyramid-layer" style="width:325px;background:#1f7050;">GPTs</div>
+                            <div class="pyramid-layer" style="width:390px;background:#165a3e;">IA Clássica</div>
+                        </div>
+                    </div>
+                    <div class="pyramid-desc">
+                        <div class="pyramid-desc-item">
+                            <div class="pyramid-dot" style="background:#3ECF8E;"></div>
+                            <div class="pyramid-label"><strong>Nível 5 — Agentes</strong>IA que decide seus próprios passos</div>
+                        </div>
+                        <div class="pyramid-desc-item">
+                            <div class="pyramid-dot" style="background:#35b87d;"></div>
+                            <div class="pyramid-label"><strong>Nível 4 — Workflows com IA</strong>Múltiplas IAs em sequência</div>
+                        </div>
+                        <div class="pyramid-desc-item">
+                            <div class="pyramid-dot" style="background:#2a9466;"></div>
+                            <div class="pyramid-label"><strong>Nível 3 — Automações</strong>Processos que rodam sozinhos</div>
+                        </div>
+                        <div class="pyramid-desc-item">
+                            <div class="pyramid-dot" style="background:#1f7050;"></div>
+                            <div class="pyramid-label"><strong>Nível 2 — GPTs Personalizados</strong>GPTs com system prompt e contexto</div>
+                        </div>
+                        <div class="pyramid-desc-item">
+                            <div class="pyramid-dot" style="background:#165a3e;"></div>
+                            <div class="pyramid-label"><strong>Nível 1 — IA Clássica</strong>ChatGPT/Claude como todo mundo já usa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 3 - NÍVEL 1: ASSISTENTES ==================== -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header level-header">Nível 1</div>
+            <div class="slide-content">
+                <div class="slide-title">IA Clássica</div>
+                <div class="slide-subtitle">O que todo mundo já conhece: abrir o ChatGPT e perguntar</div>
+                <div class="two-col">
+                    <div>
+                        <div class="col-title">Como funciona</div>
+                        <div class="llm-flow" style="padding:32px 24px;">
+                            <div class="llm-flow-node">
+                                <div class="llm-flow-box input" style="padding:16px 28px;font-size:1rem;"><i class="bi bi-box-arrow-in-right"></i> Input</div>
+                                <div class="llm-flow-label" style="font-size:0.8rem;">Seu prompt</div>
+                            </div>
+                            <div class="llm-flow-arrow" style="width:50px;"></div>
+                            <div class="llm-flow-node">
+                                <div class="llm-flow-box llm" style="padding:20px 36px;font-size:1.1rem;"><i class="bi bi-cpu"></i> LLM</div>
+                                <div class="llm-flow-label" style="font-size:0.8rem;">ChatGPT / Claude</div>
+                            </div>
+                            <div class="llm-flow-arrow" style="width:50px;"></div>
+                            <div class="llm-flow-node">
+                                <div class="llm-flow-box output" style="padding:16px 28px;font-size:1rem;"><i class="bi bi-box-arrow-right"></i> Output</div>
+                                <div class="llm-flow-label" style="font-size:0.8rem;">Resposta</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-title">Ferramentas</div>
+                        <div class="logo-grid">
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    G
+                                    <img src="logos/chatgpt.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="ChatGPT">
+                                </div>
+                                <span class="logo-name">ChatGPT Plus</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    C
+                                    <img src="logos/claude.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude">
+                                </div>
+                                <span class="logo-name">Claude Pro</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    G
+                                    <img src="logos/gemini.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gemini">
+                                </div>
+                                <span class="logo-name">Gemini Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 4 - NÍVEL 2: GPTs PERSONALIZADOS ==================== -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header level-header">Nível 2</div>
+            <div class="slide-content">
+                <div class="slide-title">GPTs Personalizados</div>
+                <div class="two-col">
+                    <div>
+                        <div class="col-title">Como funciona</div>
+                        <div class="llm-flow" style="padding:32px 20px;">
+                            <div class="llm-flow-node">
+                                <div class="llm-flow-box input" style="padding:16px 28px;font-size:1rem;"><i class="bi bi-box-arrow-in-right"></i> Input</div>
+                                <div class="llm-flow-label" style="font-size:0.8rem;">Seu prompt</div>
+                            </div>
+                            <div class="llm-flow-arrow" style="width:50px;"></div>
+                            <div class="llm-flow-node">
+                                <div class="llm-flow-box llm" style="padding:20px 36px;font-size:1.1rem;"><i class="bi bi-cpu"></i> LLM</div>
+                                <div class="llm-flow-label" style="font-size:0.8rem;">GPT personalizado</div>
+                            </div>
+                            <div class="llm-flow-arrow" style="width:50px;"></div>
+                            <div class="llm-flow-node">
+                                <div class="llm-flow-box output" style="padding:16px 28px;font-size:1rem;"><i class="bi bi-box-arrow-right"></i> Output</div>
+                                <div class="llm-flow-label" style="font-size:0.8rem;">Resposta com contexto</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px;padding:10px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.75rem;color:var(--text-muted);">
+                            <strong style="color:var(--green);">System Prompt</strong> = instruções fixas que definem tom, contexto e regras da IA antes de cada conversa
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-title">Ferramentas</div>
+                        <div class="logo-grid">
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    G
+                                    <img src="logos/chatgpt.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="ChatGPT">
+                                </div>
+                                <span class="logo-name">ChatGPT</span>
+                                <span class="logo-price">GPT Builder</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    C
+                                    <img src="logos/claude.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude">
+                                </div>
+                                <span class="logo-name">Claude</span>
+                                <span class="logo-price">Projects</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    G
+                                    <img src="logos/gemini.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gemini">
+                                </div>
+                                <span class="logo-name">Gemini</span>
+                                <span class="logo-price">Gems</span>
+                            </div>
+                        </div>
+                        <div style="margin-top:16px;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;font-family:'Courier New',monospace;font-size:0.7rem;color:var(--text-muted);line-height:1.6;">
+                            <div style="color:var(--green);font-family:'Inter',sans-serif;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Exemplo de System Prompt</div>
+                            <span style="color:var(--text-body);">Você é o assistente de vendas da empresa X.</span><br>
+                            <span style="color:var(--text-body);">Sempre responda em português formal.</span><br>
+                            <span style="color:var(--text-body);">Baseie suas respostas no manual anexo.</span><br>
+                            <span style="color:var(--text-body);">Nunca invente informações sobre preços.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 5 - NÍVEL 3: AUTOMAÇÕES ==================== -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header level-header">Nível 3</div>
+            <div class="slide-content">
+                <div class="slide-title">Automações</div>
+                <div class="two-col">
+                    <div>
+                        <div class="col-title">Como funciona</div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 18px;background:rgba(62,207,142,0.06);border:1px solid rgba(62,207,142,0.15);border-radius:10px;">
+                                <i class="bi bi-lightning" style="color:var(--green);font-size:1.4rem;"></i>
+                                <div style="font-size:0.8rem;color:var(--green);font-weight:600;text-align:center;">Gatilho</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);text-align:center;">Novo lead</div>
+                            </div>
+                            <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.2);font-size:1.1rem;"></i>
+                            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;">
+                                <i class="bi bi-clipboard-check" style="color:var(--text-body);font-size:1.4rem;"></i>
+                                <div style="font-size:0.8rem;color:var(--text-body);font-weight:600;text-align:center;">Ação 1</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);text-align:center;">Cria no CRM</div>
+                            </div>
+                            <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.2);font-size:1.1rem;"></i>
+                            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;">
+                                <i class="bi bi-envelope" style="color:var(--text-body);font-size:1.4rem;"></i>
+                                <div style="font-size:0.8rem;color:var(--text-body);font-weight:600;text-align:center;">Ação 2</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);text-align:center;">Email</div>
+                            </div>
+                            <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.2);font-size:1.1rem;"></i>
+                            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;">
+                                <i class="bi bi-bell" style="color:var(--text-body);font-size:1.4rem;"></i>
+                                <div style="font-size:0.8rem;color:var(--text-body);font-weight:600;text-align:center;">Ação 3</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);text-align:center;">Notifica Slack</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px;padding:10px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.75rem;color:var(--text-muted);">
+                            Hoje já é possível criar automações <strong style="color:var(--green);">sem código</strong> usando IA — basta descrever o que você quer e a ferramenta monta o fluxo.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-title">Ferramentas</div>
+                        <div class="logo-grid">
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    Z
+                                    <img src="logos/zapier.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Zapier">
+                                </div>
+                                <span class="logo-name">Zapier</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    M
+                                    <img src="logos/make.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Make">
+                                </div>
+                                <span class="logo-name">Make</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    n
+                                    <img src="logos/n8n.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="n8n">
+                                </div>
+                                <span class="logo-name">n8n</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 6 - NÍVEL 4: WORKFLOWS IA ==================== -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header level-header">Nível 4</div>
+            <div class="slide-content">
+                <div class="slide-title">Workflows com IA</div>
+                <div class="two-col">
+                    <div>
+                        <div class="col-title">Como funciona</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <!-- Fluxo horizontal: Gatilho → LLM → Branch -->
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 20px;background:rgba(62,207,142,0.06);border:1px solid rgba(62,207,142,0.15);border-radius:10px;min-width:110px;">
+                                    <i class="bi bi-lightning" style="color:var(--green);font-size:1.5rem;"></i>
+                                    <div style="font-size:0.85rem;color:var(--green);font-weight:600;text-align:center;">Gatilho</div>
+                                    <div style="font-size:0.75rem;color:var(--text-muted);text-align:center;">Email chega</div>
+                                </div>
+                                <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.2);font-size:1.2rem;"></i>
+                                <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 20px;background:rgba(62,207,142,0.12);border:1px solid var(--green);border-radius:10px;min-width:130px;">
+                                    <i class="bi bi-cpu" style="color:var(--green);font-size:1.5rem;"></i>
+                                    <div style="font-size:0.85rem;color:var(--green);font-weight:600;text-align:center;">LLM classifica</div>
+                                    <div style="font-size:0.75rem;color:var(--text-muted);text-align:center;">Urgente ou normal?</div>
+                                </div>
+                                <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.2);font-size:1.2rem;"></i>
+                                <!-- Branch lado a lado vertical -->
+                                <div style="display:flex;flex-direction:column;gap:8px;">
+                                    <div style="display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;">
+                                        <i class="bi bi-person-exclamation" style="color:#f0ad4e;font-size:1.2rem;"></i>
+                                        <div>
+                                            <div style="font-size:0.8rem;color:#f0ad4e;font-weight:600;">Urgente</div>
+                                            <div style="font-size:0.7rem;color:var(--text-muted);">Escala para humano</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;">
+                                        <i class="bi bi-reply" style="color:var(--text-body);font-size:1.2rem;"></i>
+                                        <div>
+                                            <div style="font-size:0.8rem;color:var(--text-body);font-weight:600;">Normal</div>
+                                            <div style="font-size:0.7rem;color:var(--text-muted);">Resposta automática</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-title">Ferramentas</div>
+                        <div class="logo-grid">
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    n
+                                    <img src="logos/n8n.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="n8n">
+                                </div>
+                                <span class="logo-name">n8n</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    L
+                                    <img src="logos/langflow.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Langflow">
+                                </div>
+                                <span class="logo-name">Langflow</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    F
+                                    <img src="logos/flowise.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Flowise">
+                                </div>
+                                <span class="logo-name">Flowise</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    R
+                                    <img src="logos/relevance.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Relevance AI">
+                                </div>
+                                <span class="logo-name">Relevance AI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:12px;padding:10px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.75rem;color:var(--text-muted);">
+                    Aqui a IA pode tomar uma <strong style="color:var(--green);">pequena decisão</strong> com base nos parâmetros disponíveis — classificar, extrair ou direcionar o fluxo automaticamente.
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 7 - NÍVEL 5: AGENTES ==================== -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header level-header">Nível 5</div>
+            <div class="slide-content">
+                <div class="slide-title">Agentes Autônomos</div>
+                <div class="two-col">
+                    <div>
+                        <div class="col-title">Como funciona</div>
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <!-- Missão -->
+                            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 20px;background:rgba(62,207,142,0.06);border:1px solid rgba(62,207,142,0.15);border-radius:10px;min-width:110px;">
+                                <i class="bi bi-flag" style="color:var(--green);font-size:1.5rem;"></i>
+                                <div style="font-size:0.85rem;color:var(--green);font-weight:600;text-align:center;">Missão</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);text-align:center;">"Pesquise e monte relatório"</div>
+                            </div>
+                            <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.2);font-size:1.2rem;"></i>
+                            <!-- Agente em loop -->
+                            <div style="padding:18px 20px;background:rgba(62,207,142,0.12);border:1px solid var(--green);border-radius:10px;flex:1;">
+                                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                                    <i class="bi bi-cpu" style="color:var(--green);font-size:1.3rem;"></i>
+                                    <div style="font-size:0.85rem;color:var(--green);font-weight:600;">Agente decide sozinho</div>
+                                    <i class="bi bi-arrow-repeat" style="color:var(--green);opacity:0.5;margin-left:auto;font-size:1.1rem;"></i>
+                                </div>
+                                <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                                    <span style="padding:5px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;font-size:0.75rem;color:var(--text-body);"><i class="bi bi-search"></i> Pesquisa</span>
+                                    <span style="padding:5px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;font-size:0.75rem;color:var(--text-body);"><i class="bi bi-globe"></i> Navega</span>
+                                    <span style="padding:5px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;font-size:0.75rem;color:var(--text-body);"><i class="bi bi-file-earmark-text"></i> Lê docs</span>
+                                    <span style="padding:5px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;font-size:0.75rem;color:var(--text-body);"><i class="bi bi-pencil"></i> Escreve</span>
+                                    <span style="padding:5px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;font-size:0.75rem;color:var(--text-body);"><i class="bi bi-terminal"></i> Executa</span>
+                                </div>
+                            </div>
+                            <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.2);font-size:1.2rem;"></i>
+                            <!-- Resultado -->
+                            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;min-width:110px;">
+                                <i class="bi bi-check-circle" style="color:var(--green);font-size:1.5rem;"></i>
+                                <div style="font-size:0.85rem;color:var(--green);font-weight:600;text-align:center;">Concluído</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);text-align:center;">Relatório pronto</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-title">Para construir agentes</div>
+                        <div class="logo-grid">
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    Cr
+                                    <img src="logos/crewai.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="CrewAI">
+                                </div>
+                                <span class="logo-name">CrewAI</span>
+                                <span class="logo-price">multi-agent</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    LG
+                                    <img src="logos/langgraph.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="LangGraph">
+                                </div>
+                                <span class="logo-name">LangGraph</span>
+                                <span class="logo-price">framework</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    O
+                                    <img src="logos/openai.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="OpenAI">
+                                </div>
+                                <span class="logo-name">OpenAI</span>
+                                <span class="logo-price">Agents SDK</span>
+                            </div>
+                        </div>
+                        <div class="col-title" style="margin-top:16px;">Agentes prontos</div>
+                        <div class="logo-grid">
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    C
+                                    <img src="logos/cursor.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Cursor">
+                                </div>
+                                <span class="logo-name">Cursor</span>
+                                <span class="logo-price">código</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    L
+                                    <img src="logos/lovable.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Lovable">
+                                </div>
+                                <span class="logo-name">Lovable</span>
+                                <span class="logo-price">apps</span>
+                            </div>
+                            <div class="logo-card">
+                                <div class="logo-circle" style="width:48px;height:48px;">
+                                    M
+                                    <img src="logos/manus.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Manus">
+                                </div>
+                                <span class="logo-name">Manus</span>
+                                <span class="logo-price">geral</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:12px;padding:10px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.75rem;color:var(--text-muted);">
+                    Você entrega uma <strong style="color:var(--green);">missão</strong> e o agente trabalha de forma autônoma — usando as ferramentas que precisar, pelo tempo necessário — até entregar o resultado.
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 8 - EVOLUÇÃO ==================== -->
+        <div class="slide" data-slide="8">
+            <div class="slide-content">
+                <div class="slide-title">A evolução da IA</div>
+
+                <!-- Barra de progresso horizontal -->
+                <div style="display:flex;align-items:stretch;margin:8px 0 20px;border-radius:8px;overflow:hidden;height:38px;">
+                    <div style="flex:1;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:var(--black);">Workflows</div>
+                    <div style="flex:1;background:#1f7050;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:var(--white);">Agentes</div>
+                    <div style="flex:1;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:var(--text-body);border:1px solid var(--border);border-left:none;">Futuro</div>
+                </div>
+
+                <!-- Cards com mini diagramas -->
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+                    <!-- Workflows -->
+                    <div style="border:1px solid var(--border);border-radius:10px;padding:16px;background:var(--surface);display:flex;flex-direction:column;gap:10px;">
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid var(--border);">
+                            <div style="display:flex;align-items:center;gap:5px;">
+                                <span style="font-size:0.6rem;color:var(--green);border:1px solid rgba(62,207,142,0.3);padding:3px 8px;border-radius:4px;">In</span>
+                                <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.15);font-size:0.55rem;"></i>
+                                <span style="font-size:0.6rem;color:var(--green);background:rgba(62,207,142,0.1);border:1px solid var(--green);padding:3px 8px;border-radius:4px;font-weight:600;">LLM</span>
+                                <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.15);font-size:0.55rem;"></i>
+                                <span style="font-size:0.6rem;color:var(--green);background:rgba(62,207,142,0.1);border:1px solid var(--green);padding:3px 8px;border-radius:4px;font-weight:600;">LLM</span>
+                                <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.15);font-size:0.55rem;"></i>
+                                <span style="font-size:0.6rem;color:var(--green);border:1px solid rgba(62,207,142,0.3);padding:3px 8px;border-radius:4px;">Out</span>
+                            </div>
+                        </div>
+                        <div style="font-size:0.7rem;color:var(--text-muted);line-height:1.5;">LLMs orquestradas em sequência — sumariza, classifica, extrai</div>
+                        <div style="font-size:0.65rem;font-weight:600;color:var(--green);margin-top:auto;padding-top:8px;border-top:1px solid var(--border);"><i class="bi bi-check-circle-fill"></i> Consolidado</div>
+                    </div>
+
+                    <!-- Agents -->
+                    <div style="border:1px solid rgba(62,207,142,0.2);border-radius:10px;padding:16px;background:rgba(62,207,142,0.04);display:flex;flex-direction:column;gap:10px;">
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid var(--border);">
+                            <span style="font-size:0.55rem;color:var(--green);background:rgba(62,207,142,0.1);border:1px solid var(--green);padding:2px 6px;border-radius:4px;font-weight:600;"><i class="bi bi-cpu"></i> LLM</span>
+                            <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
+                                <i class="bi bi-arrow-down-left" style="color:rgba(255,255,255,0.15);font-size:0.5rem;"></i>
+                                <i class="bi bi-arrow-down" style="color:rgba(255,255,255,0.15);font-size:0.5rem;"></i>
+                                <i class="bi bi-arrow-down-right" style="color:rgba(255,255,255,0.15);font-size:0.5rem;"></i>
+                            </div>
+                            <div style="display:flex;gap:3px;">
+                                <span style="font-size:0.5rem;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-search"></i></span>
+                                <span style="font-size:0.5rem;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-pencil"></i></span>
+                                <span style="font-size:0.5rem;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-terminal"></i></span>
+                            </div>
+                        </div>
+                        <div style="font-size:0.7rem;color:var(--text-muted);line-height:1.5;">LLM decide seus próprios passos</div>
+                        <div style="font-size:0.65rem;font-weight:600;color:var(--green);margin-top:auto;padding-top:8px;border-top:1px solid rgba(62,207,142,0.15);"><i class="bi bi-arrow-repeat"></i> Emergindo</div>
+                    </div>
+
+                    <!-- Futuro -->
+                    <div style="border:1px solid var(--border);border-radius:10px;padding:16px;background:var(--surface);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;">
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid var(--border);">
+                            <span style="font-size:0.55rem;color:var(--text-body);background:rgba(62,207,142,0.1);border:1px solid var(--green);padding:2px 6px;border-radius:4px;font-weight:600;"><i class="bi bi-cpu"></i> LLM</span>
+                            <div style="display:flex;align-items:center;gap:3px;margin-top:2px;">
+                                <i class="bi bi-arrow-down-left" style="color:rgba(255,255,255,0.1);font-size:0.5rem;"></i>
+                                <i class="bi bi-arrow-down" style="color:rgba(255,255,255,0.1);font-size:0.5rem;"></i>
+                                <i class="bi bi-arrow-down-right" style="color:rgba(255,255,255,0.1);font-size:0.5rem;"></i>
+                            </div>
+                            <div style="display:flex;gap:2px;flex-wrap:wrap;justify-content:center;">
+                                <span style="font-size:0.45rem;padding:2px 4px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-search"></i></span>
+                                <span style="font-size:0.45rem;padding:2px 4px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-pencil"></i></span>
+                                <span style="font-size:0.45rem;padding:2px 4px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-terminal"></i></span>
+                                <span style="font-size:0.45rem;padding:2px 4px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-globe"></i></span>
+                                <span style="font-size:0.45rem;padding:2px 4px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-credit-card"></i></span>
+                                <span style="font-size:0.45rem;padding:2px 4px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-muted);"><i class="bi bi-database"></i></span>
+                            </div>
+                        </div>
+                        <div style="font-size:0.7rem;color:var(--text-muted);line-height:1.5;">
+                            <span style="color:var(--text-body);">Autonomia ↑</span><br>
+                            <span style="color:var(--text-body);">Ferramentas ↑</span><br>
+                            <span style="color:var(--text-body);">Confiança ↑</span>
+                        </div>
+                        <div style="font-size:0.65rem;font-weight:600;color:var(--text-muted);margin-top:auto;padding-top:8px;border-top:1px solid var(--border);"><i class="bi bi-hourglass-split"></i> Próximos anos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 9 - FERRAMENTAS DE CONSTRUÇÃO ==================== -->
+        <div class="slide" data-slide="9">
+            <div class="slide-content">
+                <div class="slide-title">Ferramentas para criar</div>
+
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+                    <!-- Pesquisa -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-search"></i> Pesquisa</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/perplexity.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Perplexity" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Perplexity</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/gemini.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gemini" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Gemini</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Escrita -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-pencil"></i> Escrita</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/chatgpt.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="ChatGPT" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">ChatGPT</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/claude.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Claude</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Design -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-palette"></i> Design</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/canva.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Canva" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Canva</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/gamma.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gamma" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Gamma</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reuniões -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-camera-video"></i> Reuniões</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/granola.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Granola" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Granola</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-code-slash"></i> Código</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/cursor.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Cursor" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Cursor</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/lovable.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Lovable" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Lovable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Automação -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-gear"></i> Automação</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/n8n.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="n8n" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">n8n</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/make.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Make" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Make</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Excel -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-file-earmark-spreadsheet"></i> Excel</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/claude.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Claude</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 10 - PRIMEIROS PASSOS ==================== -->
+        <div class="slide" data-slide="10">
+            <div class="slide-content" style="justify-content:center;">
+                <div class="slide-title">Primeiros passos</div>
+                <div class="step-cards">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-card-header level-header"><i class="bi bi-lightning"></i> Hoje</div>
+                        <div class="step-card-body">
+                            <p>Crie um assistente com seu FAQ</p>
+                            <div class="logo-grid" style="margin-top:20px;justify-content:center;">
+                                <div class="logo-card">
+                                    <div class="logo-circle" style="width:40px;height:40px;">
+                                        G
+                                        <img src="logos/chatgpt.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="ChatGPT" style="width:40px;height:40px;">
+                                    </div>
+                                </div>
+                                <div class="logo-card">
+                                    <div class="logo-circle" style="width:40px;height:40px;">
+                                        C
+                                        <img src="logos/claude.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude" style="width:40px;height:40px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-card-header level-header"><i class="bi bi-calendar-week"></i> Essa semana</div>
+                        <div class="step-card-body">
+                            <p>Liste 3 tarefas repetitivas. Identifique qual nível resolveria.</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-card-header level-header"><i class="bi bi-calendar-month"></i> Esse mês</div>
+                        <div class="step-card-body">
+                            <p>Implemente uma automação simples (Nível 3) ou teste Vibe Coding</p>
+                            <div class="logo-grid" style="margin-top:20px;justify-content:center;">
+                                <div class="logo-card">
+                                    <div class="logo-circle" style="width:40px;height:40px;">
+                                        n
+                                        <img src="logos/n8n.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="n8n" style="width:40px;height:40px;">
+                                    </div>
+                                </div>
+                                <div class="logo-card">
+                                    <div class="logo-circle" style="width:40px;height:40px;">
+                                        L
+                                        <img src="logos/lovable.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Lovable" style="width:40px;height:40px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 11 - ENCERRAMENTO ==================== -->
+        <div class="slide" data-slide="11">
+            <div class="centered" style="position:relative;">
+                <div class="deco-ring" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+                <div class="deco-ring-2" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+                <h1 style="font-size:4rem;font-weight:600;margin-bottom:36px;color:var(--white);position:relative;z-index:1;">
+                    Dúvidas<span style="color:var(--green);">?</span>
+                </h1>
+                <ul class="summary-list" style="margin-bottom:48px;position:relative;z-index:1;">
+                    <li>5 níveis: IA Clássica → GPTs → Automações → Workflows → Agentes</li>
+                    <li>Cada nível tem ferramentas específicas</li>
+                    <li>Comece pelo 1, evolua com dados</li>
+                    <li>O melhor momento é agora</li>
+                </ul>
+                <div class="cta-box" style="position:relative;z-index:1;">Masada.ia</div>
+            </div>
+        </div>
+
+
+
+        <!-- ==================== NAVIGATION ==================== -->
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn">&#8592;</button>
+            <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">11</span></span>
+            <button class="nav-btn" id="nextBtn">&#8594;</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideSpan = document.getElementById('currentSlide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+
+        function showSlide(n) {
+            if (n < 1) n = 1;
+            if (n > totalSlides) n = totalSlides;
+            currentSlide = n;
+
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                if (parseInt(slide.dataset.slide) === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+
+            indicators.forEach(indicator => {
+                indicator.classList.remove('active');
+                if (parseInt(indicator.dataset.goto) === currentSlide) {
+                    indicator.classList.add('active');
+                }
+            });
+
+            currentSlideSpan.textContent = currentSlide;
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+        }
+
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', () => {
+                showSlide(parseInt(indicator.dataset.goto));
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                showSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                showSlide(currentSlide - 1);
+            }
+        });
+
+        showSlide(1);
+    </script>
+</body>
+</html>
