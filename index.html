@@ -652,26 +652,7 @@
             vertical-align: middle;
         }
 
-        /* Step card numbers (slide 10) */
-        .step-card {
-            position: relative;
-        }
-        .step-number {
-            position: absolute;
-            top: 50px; right: 16px;
-            font-size: 4rem;
-            font-weight: 900;
-            color: rgba(62,207,142,0.07);
-            line-height: 1;
-            pointer-events: none;
-        }
-
-        /* CTA glow (slide 11) */
-        .cta-box {
-            box-shadow: 0 0 30px rgba(62,207,142,0.2);
-        }
-
-        /* Chat demo (slide 3) */
+/* Chat demo (slide 3) */
         .chat-demo {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -1071,7 +1052,11 @@
                                 <div class="llm-flow-label" style="font-size:0.8rem;">Seu prompt</div>
                             </div>
                             <div class="llm-flow-arrow" style="width:50px;"></div>
-                            <div class="llm-flow-node">
+                            <div class="llm-flow-node" style="position:relative;">
+                                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);background:rgba(62,207,142,0.12);border:1px dashed var(--green);border-radius:6px;padding:4px 10px;font-size:0.65rem;color:var(--green);white-space:nowrap;display:flex;align-items:center;gap:4px;">
+                                    <i class="bi bi-file-earmark-text"></i> System Prompt
+                                </div>
+                                <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:1px;height:10px;border-left:1px dashed var(--green);"></div>
                                 <div class="llm-flow-box llm" style="padding:20px 36px;font-size:1.1rem;"><i class="bi bi-cpu"></i> LLM</div>
                                 <div class="llm-flow-label" style="font-size:0.8rem;">GPT personalizado</div>
                             </div>
@@ -1505,6 +1490,10 @@
                                 <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/gamma.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gamma" style="border-radius:10px;"></div>
                                 <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Gamma</span>
                             </div>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/lovable.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Lovable" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Lovable</span>
+                            </div>
                         </div>
                     </div>
 
@@ -1543,8 +1532,8 @@
                                 <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">n8n</span>
                             </div>
                             <div style="display:flex;align-items:center;gap:10px;">
-                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/make.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Make" style="border-radius:10px;"></div>
-                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Make</span>
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/claudecode.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude Code" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Claude Code</span>
                             </div>
                         </div>
                     </div>
@@ -1554,9 +1543,7 @@
                         <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-book"></i> Estudo</div>
                         <div style="display:flex;flex-direction:column;gap:10px;">
                             <div style="display:flex;align-items:center;gap:10px;">
-                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;background:#1a1a2e;display:flex;align-items:center;justify-content:center;">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="2" width="14" height="20" rx="2" stroke="#a78bfa" stroke-width="1.5"/><path d="M7 7h6M7 11h6M7 15h4" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/><path d="M17 8l4-2v12l-4 2V8z" fill="#a78bfa" opacity="0.3" stroke="#a78bfa" stroke-width="1.2"/></svg>
-                                </div>
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/notebooklm.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="NotebookLM" style="border-radius:10px;"></div>
                                 <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">NotebookLM</span>
                             </div>
                         </div>
@@ -1567,10 +1554,8 @@
                         <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-image"></i> Imagens</div>
                         <div style="display:flex;flex-direction:column;gap:10px;">
                             <div style="display:flex;align-items:center;gap:10px;">
-                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;background:#1a1a2e;display:flex;align-items:center;justify-content:center;">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" rx="2" fill="#f59e0b" opacity="0.15"/><path d="M8 8l4 3 4-3M8 13l4 3 4-3" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </div>
-                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Napkin</span>
+                                <div class="logo-circle" style="width:38px;height:38px;flex-shrink:0;border-radius:10px;"><img src="logos/nanobanana.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Nano Banana" style="border-radius:10px;"></div>
+                                <span style="font-size:0.8rem;color:var(--text-body);font-weight:500;">Nano Banana</span>
                             </div>
                         </div>
                     </div>
@@ -1589,83 +1574,140 @@
             </div>
         </div>
 
-        <!-- ==================== SLIDE 10 - PRIMEIROS PASSOS ==================== -->
+
+
+
+        <!-- ==================== SLIDE 10 - NÍVEL 2 APROFUNDADO: ANATOMIA DO PROMPT ==================== -->
         <div class="slide" data-slide="10">
-            <div class="slide-content" style="justify-content:center;">
-                <div class="slide-title">Primeiros passos</div>
-                <div class="step-cards">
-                    <div class="step-card">
-                        <div class="step-number">1</div>
-                        <div class="step-card-header level-header"><i class="bi bi-lightning"></i> Hoje</div>
-                        <div class="step-card-body">
-                            <p>Crie um assistente com seu FAQ</p>
-                            <div class="logo-grid" style="margin-top:20px;justify-content:center;">
-                                <div class="logo-card">
-                                    <div class="logo-circle" style="width:40px;height:40px;">
-                                        G
-                                        <img src="logos/chatgpt.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="ChatGPT" style="width:40px;height:40px;">
-                                    </div>
-                                </div>
-                                <div class="logo-card">
-                                    <div class="logo-circle" style="width:40px;height:40px;">
-                                        C
-                                        <img src="logos/claude.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude" style="width:40px;height:40px;">
-                                    </div>
-                                </div>
+            <div class="slide-header level-header">Nível 2</div>
+            <div class="slide-content" style="padding-top:16px;padding-bottom:70px;gap:10px;">
+                <div class="slide-title" style="font-size:1.7rem;">Anatomia de um Prompt</div>
+                <div class="slide-subtitle" style="font-size:0.85rem;margin-bottom:4px;">As 6 partes que transformam uma pergunta genérica em um prompt profissional</div>
+                <div style="display:grid;grid-template-columns:3fr 2fr;gap:24px;flex:1;align-items:stretch;">
+                    <!-- Coluna Esquerda: Diagrama das 6 seções -->
+                    <div style="display:flex;flex-direction:column;gap:5px;">
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #3ECF8E;display:flex;align-items:center;gap:10px;">
+                            <div style="flex:1;">
+                                <div style="font-size:0.7rem;font-weight:600;color:#3ECF8E;">1. Role</div>
+                                <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Defina um papel claro para o modelo adotar</div>
                             </div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#3ECF8E;flex-shrink:0;"></div>
                         </div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">2</div>
-                        <div class="step-card-header level-header"><i class="bi bi-calendar-week"></i> Essa semana</div>
-                        <div class="step-card-body">
-                            <p>Liste 3 tarefas repetitivas. Identifique qual nível resolveria.</p>
-                        </div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">3</div>
-                        <div class="step-card-header level-header"><i class="bi bi-calendar-month"></i> Esse mês</div>
-                        <div class="step-card-body">
-                            <p>Implemente uma automação simples (Nível 3) ou teste Vibe Coding</p>
-                            <div class="logo-grid" style="margin-top:20px;justify-content:center;">
-                                <div class="logo-card">
-                                    <div class="logo-circle" style="width:40px;height:40px;">
-                                        n
-                                        <img src="logos/n8n.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="n8n" style="width:40px;height:40px;">
-                                    </div>
-                                </div>
-                                <div class="logo-card">
-                                    <div class="logo-circle" style="width:40px;height:40px;">
-                                        L
-                                        <img src="logos/lovable.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Lovable" style="width:40px;height:40px;">
-                                    </div>
-                                </div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #35b87d;display:flex;align-items:center;gap:10px;">
+                            <div style="flex:1;">
+                                <div style="font-size:0.7rem;font-weight:600;color:#35b87d;">2. Objetivo</div>
+                                <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Diga exatamente o que quer que ele faça — seja explícito</div>
                             </div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#35b87d;flex-shrink:0;"></div>
+                        </div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #2a9466;display:flex;align-items:center;gap:10px;">
+                            <div style="flex:1;">
+                                <div style="font-size:0.7rem;font-weight:600;color:#2a9466;">3. Contexto</div>
+                                <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Dê tudo que o modelo precisa: restrições, exemplos, dados</div>
+                            </div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#2a9466;flex-shrink:0;"></div>
+                        </div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #f0ad4e;display:flex;align-items:center;gap:10px;">
+                            <div style="flex:1;">
+                                <div style="font-size:0.7rem;font-weight:600;color:#f0ad4e;">4. Raciocínio</div>
+                                <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Peça que pense passo a passo antes de responder</div>
+                            </div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#f0ad4e;flex-shrink:0;"></div>
+                        </div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #5b9bd5;display:flex;align-items:center;gap:10px;">
+                            <div style="flex:1;">
+                                <div style="font-size:0.7rem;font-weight:600;color:#5b9bd5;">5. Formato de Saída</div>
+                                <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Especifique: lista, tabela, parágrafos, JSON</div>
+                            </div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#5b9bd5;flex-shrink:0;"></div>
+                        </div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #e06666;display:flex;align-items:center;gap:10px;">
+                            <div style="flex:1;">
+                                <div style="font-size:0.7rem;font-weight:600;color:#e06666;">6. Condição de Parada</div>
+                                <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Defina limites: tamanho, escopo, quando parar</div>
+                            </div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#e06666;flex-shrink:0;"></div>
                         </div>
                     </div>
+
+                    <!-- Coluna Direita: Exemplo Prático -->
+                    <div style="display:flex;flex-direction:column;">
+                        <div style="padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;font-family:'Courier New',monospace;font-size:0.58rem;color:var(--text-muted);line-height:1.55;flex:1;">
+                            <div style="color:var(--green);font-family:'Inter',sans-serif;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;font-weight:600;">Exemplo completo</div>
+                            <span style="color:#3ECF8E;">// Role</span><br>
+                            <span style="color:var(--text-body);">Aja como um consultor financeiro especializado em PMEs brasileiras.</span><br><br>
+                            <span style="color:#35b87d;">// Objetivo</span><br>
+                            <span style="color:var(--text-body);">Analise o fluxo de caixa anexo e recomende 3 cortes de custo.</span><br><br>
+                            <span style="color:#2a9466;">// Contexto</span><br>
+                            <span style="color:var(--text-body);">Empresa: varejo de roupas, 12 funcionários. R$180k/mês. Margem: 22%.</span><br><br>
+                            <span style="color:#f0ad4e;">// Raciocínio</span><br>
+                            <span style="color:var(--text-body);">Explique a lógica de cada corte antes de recomendar.</span><br><br>
+                            <span style="color:#5b9bd5;">// Formato</span><br>
+                            <span style="color:var(--text-body);">Tabela: Corte | Economia | Impacto</span><br><br>
+                            <span style="color:#e06666;">// Parada</span><br>
+                            <span style="color:var(--text-body);">Máximo 3 recomendações. Não sugira demissões.</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:8px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.7rem;color:var(--text-muted);">
+                    Um bom prompt transforma uma IA genérica em um <strong style="color:var(--green);">especialista</strong> do seu negócio
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 11 - ENCERRAMENTO ==================== -->
+        <!-- ==================== SLIDE 11 - NÍVEL 3 APROFUNDADO: BUILDING BLOCKS DE AUTOMAÇÃO ==================== -->
         <div class="slide" data-slide="11">
-            <div class="centered" style="position:relative;">
-                <div class="deco-ring" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-                <div class="deco-ring-2" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-                <h1 style="font-size:4rem;font-weight:600;margin-bottom:36px;color:var(--white);position:relative;z-index:1;">
-                    Dúvidas<span style="color:var(--green);">?</span>
-                </h1>
-                <ul class="summary-list" style="margin-bottom:48px;position:relative;z-index:1;">
-                    <li>5 níveis: IA Clássica → GPTs → Automações → Workflows → Agentes</li>
-                    <li>Cada nível tem ferramentas específicas</li>
-                    <li>Comece pelo 1, evolua com dados</li>
-                    <li>O melhor momento é agora</li>
-                </ul>
-                <div class="cta-box" style="position:relative;z-index:1;">Masada.ia</div>
+            <div class="slide-header level-header">Nível 3</div>
+            <div class="slide-content" style="padding-top:14px;padding-bottom:70px;gap:8px;">
+                <div class="slide-title" style="font-size:1.7rem;">Os building blocks de uma automação</div>
+                <div class="slide-subtitle" style="font-size:0.85rem;margin-bottom:2px;">5 conceitos que você precisa conhecer para criar sua primeira automação</div>
+                <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
+                    <!-- 1. Gatilho -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 14px;border-left:4px solid #3ECF8E;display:flex;align-items:center;gap:12px;">
+                        <div style="flex:1;">
+                            <div style="font-size:0.72rem;font-weight:600;color:#3ECF8E;">1. Gatilho (Trigger)</div>
+                            <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">O evento que inicia a automação: novo email, formulário preenchido, horário agendado</div>
+                        </div>
+                        <div style="font-size:0.58rem;color:var(--text-muted);font-style:italic;text-align:right;min-width:180px;opacity:0.7;">"É o <span style="color:#3ECF8E;">quando</span> — quando isso acontecer, comece"</div>
+                    </div>
+                    <!-- 2. Ação -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 14px;border-left:4px solid #35b87d;display:flex;align-items:center;gap:12px;">
+                        <div style="flex:1;">
+                            <div style="font-size:0.72rem;font-weight:600;color:#35b87d;">2. Ação (Action)</div>
+                            <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">O que a automação executa: enviar email, criar registro, atualizar planilha</div>
+                        </div>
+                        <div style="font-size:0.58rem;color:var(--text-muted);font-style:italic;text-align:right;min-width:180px;opacity:0.7;">"É o <span style="color:#35b87d;">faça</span> — faça isso automaticamente"</div>
+                    </div>
+                    <!-- 3. API -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 14px;border-left:4px solid #2a9466;display:flex;align-items:center;gap:12px;">
+                        <div style="flex:1;">
+                            <div style="font-size:0.72rem;font-weight:600;color:#2a9466;">3. API</div>
+                            <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Como sistemas diferentes se conectam. O cardápio de comandos que um software oferece a outros</div>
+                        </div>
+                        <div style="font-size:0.58rem;color:var(--text-muted);font-style:italic;text-align:right;min-width:180px;opacity:0.7;">"O <span style="color:#2a9466;">garçom</span> entre dois sistemas que não se conhecem"</div>
+                    </div>
+                    <!-- 4. Webhook -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 14px;border-left:4px solid #f0ad4e;display:flex;align-items:center;gap:12px;">
+                        <div style="flex:1;">
+                            <div style="font-size:0.72rem;font-weight:600;color:#f0ad4e;">4. Webhook</div>
+                            <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Uma URL que recebe dados em tempo real. Você dá o endereço e o sistema te avisa quando algo acontece</div>
+                        </div>
+                        <div style="font-size:0.58rem;color:var(--text-muted);font-style:italic;text-align:right;min-width:180px;opacity:0.7;">"Dar seu <span style="color:#f0ad4e;">celular</span> para receber uma notificação"</div>
+                    </div>
+                    <!-- 5. Credenciais -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 14px;border-left:4px solid #5b9bd5;display:flex;align-items:center;gap:12px;">
+                        <div style="flex:1;">
+                            <div style="font-size:0.72rem;font-weight:600;color:#5b9bd5;">5. Credenciais</div>
+                            <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">A chave que permite a automação acessar suas contas (Gmail, CRM, planilhas)</div>
+                        </div>
+                        <div style="font-size:0.58rem;color:var(--text-muted);font-style:italic;text-align:right;min-width:180px;opacity:0.7;">"A <span style="color:#5b9bd5;">senha do Wi-Fi</span> — sem ela, nada conecta"</div>
+                    </div>
+                </div>
+                <div style="padding:8px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.7rem;color:var(--text-muted);">
+                    Com esses 5 conceitos você já consegue montar sua <strong style="color:var(--green);">primeira automação</strong> em qualquer ferramenta
+                </div>
             </div>
         </div>
-
-
 
         <!-- ==================== NAVIGATION ==================== -->
         <div class="navigation">
