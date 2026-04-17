@@ -931,9 +931,34 @@
             <div class="centered" style="position:relative;">
                 <div class="deco-ring" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
                 <div class="deco-ring-2" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-                <h1 style="font-size:3.2rem;font-weight:600;letter-spacing:-0.03em;margin-bottom:16px;color:var(--white);position:relative;z-index:1;">
-                    Além do ChatGPT: o que construir com <span style="color:var(--green);">Inteligência Artificial</span>
-                </h1>
+                <div style="position:relative;z-index:1;">
+                    <h1 style="font-size:2.4rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:32px;color:var(--white);">Os 4 níveis de uso de <span style="color:var(--green);">IA</span></h1>
+                    <div style="display:flex;justify-content:center;">
+                        <div>
+                            <div class="pyramid" style="position:relative;">
+                                <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+                                    <div class="pyramid-layer" style="width:150px;background:#3ECF8E;">Agentes</div>
+                                    <div style="font-size:0.7rem;font-weight:700;color:var(--green);white-space:nowrap;">~0.1%</div>
+                                </div>
+                                <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+                                    <div class="pyramid-layer" style="width:240px;background:#2a9466;">Automações com IA</div>
+                                    <div style="font-size:0.7rem;font-weight:700;color:var(--green);white-space:nowrap;">~0.5%</div>
+                                </div>
+                                <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+                                    <div style="display:flex;gap:3px;justify-content:center;">
+                                        <div class="pyramid-layer" style="width:163px;background:#1f7050;font-size:0.75rem;">GPTs</div>
+                                        <div class="pyramid-layer" style="width:163px;background:#1a5c42;font-size:0.75rem;">Ferramentas de IA</div>
+                                    </div>
+                                    <div style="font-size:0.7rem;font-weight:700;color:var(--green);white-space:nowrap;">~1%</div>
+                                </div>
+                                <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+                                    <div class="pyramid-layer" style="width:420px;background:#165a3e;">IA Clássica</div>
+                                    <div style="font-size:0.75rem;font-weight:700;color:var(--green);white-space:nowrap;">98%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1026,10 +1051,9 @@
                             </div>
                             <div class="logo-card">
                                 <div class="logo-circle" style="width:48px;height:48px;">
-                                    G
-                                    <img src="logos/gemini.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gemini">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 509.641" style="width:100%;height:100%;border-radius:inherit;"><path d="M115.612 0h280.776C459.975 0 512 52.026 512 115.612v278.416c0 63.587-52.025 115.613-115.612 115.613H115.612C52.026 509.641 0 457.615 0 394.028V115.612C0 52.026 52.026 0 115.612 0z"/><path fill="#fff" d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg>
                                 </div>
-                                <span class="logo-name">Gemini</span>
+                                <span class="logo-name">Grok</span>
                             </div>
                         </div>
                     </div>
@@ -1041,31 +1065,46 @@
         <div class="slide" data-slide="4">
             <div class="slide-header level-header">Nível 1</div>
             <div class="slide-content" style="padding-top:16px;padding-bottom:70px;gap:10px;">
-                <div class="slide-title" style="font-size:1.7rem;">Técnicas Avançadas de Prompting</div>
-                <div class="slide-subtitle" style="font-size:0.85rem;margin-bottom:4px;">Como engenheiros de prompt do ChatGPT e Claude escrevem prompts internamente</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;align-items:stretch;">
+                <div class="slide-title" style="font-size:1.7rem;">Dicas</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1;align-items:stretch;">
                     <!-- Card 1: Two-Step Prompting -->
-                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-left:4px solid #f0ad4e;display:flex;flex-direction:column;gap:8px;">
-                        <div style="font-size:0.85rem;font-weight:600;color:#f0ad4e;">1. Prompting em Duas Etapas</div>
-                        <div style="font-size:0.68rem;color:var(--text-muted);">Peça a <strong>estratégia</strong> primeiro, depois peça para <strong>executar</strong></div>
-                        <div style="font-size:0.62rem;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:8px 10px;border-radius:4px;font-family:'Courier New',monospace;line-height:1.5;">
-                            <span style="color:#f0ad4e;">1º</span> "Qual a melhor forma de criar um post viral no LinkedIn?"<br>
-                            <span style="color:#f0ad4e;">2º</span> "Agora crie um post usando essa estratégia que você descreveu."
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;border-left:4px solid #3ECF8E;display:flex;flex-direction:column;gap:10px;">
+                        <div style="font-size:0.95rem;font-weight:600;color:#3ECF8E;">1. Prompting em Duas Etapas</div>
+                        <div style="font-size:0.78rem;color:var(--text-muted);">Primeiro peça a <strong>estratégia</strong>, depois peça para <strong>executar</strong></div>
+                        <div style="font-size:0.72rem;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:10px 12px;border-radius:4px;font-family:'Courier New',monospace;line-height:1.6;">
+                            <span style="color:#3ECF8E;">1º</span> "Qual a melhor estratégia para X?"<br>
+                            <span style="color:#3ECF8E;">2º</span> "Agora execute essa estratégia."
                         </div>
                     </div>
 
-                    <!-- Card 2: Step by Step -->
-                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-left:4px solid #3ECF8E;display:flex;flex-direction:column;gap:8px;">
-                        <div style="font-size:0.85rem;font-weight:600;color:#3ECF8E;">2. Quebre em Etapas</div>
-                        <div style="font-size:0.68rem;color:var(--text-muted);">Peça para pensar <strong>passo a passo</strong> — a IA raciocina melhor</div>
-                        <div style="font-size:0.62rem;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:8px 10px;border-radius:4px;font-family:'Courier New',monospace;line-height:1.5;">
-                            <span style="color:#e06666;">❌</span> "Analise esse contrato e me diga os riscos"<br>
-                            <span style="color:#3ECF8E;">✅</span> "Analise esse contrato passo a passo: 1) Liste as cláusulas principais 2) Identifique obrigações de cada parte 3) Aponte os riscos"
+                    <!-- Card 2: Máximo de Contexto -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;border-left:4px solid #3ECF8E;display:flex;flex-direction:column;gap:10px;">
+                        <div style="font-size:0.95rem;font-weight:600;color:#3ECF8E;">2. Dê o Máximo de Contexto</div>
+                        <div style="font-size:0.78rem;color:var(--text-muted);">Quanto mais <strong>contexto</strong>, melhor — use <strong>voz</strong> para ditar</div>
+                        <div style="font-size:0.72rem;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:10px 12px;border-radius:4px;font-family:'Courier New',monospace;line-height:1.6;">
+                            <span style="color:#e06666;">❌</span> "Escreva um email profissional"<br>
+                            <span style="color:#3ECF8E;">✅</span> "Email para cliente que atrasou pagamento, tom firme mas educado..."
+                        </div>
+                        <div style="display:flex;align-items:center;gap:6px;background:rgba(62,207,142,0.08);border:1px solid rgba(62,207,142,0.2);border-radius:6px;padding:6px 10px;margin-top:auto;">
+                            <img src="logos/wisprflow.png" alt="Flow" style="width:18px;height:18px;border-radius:3px;">
+                            <span style="font-size:0.7rem;color:#3ECF8E;font-weight:500;">Flow</span>
+                            <span style="font-size:0.62rem;color:var(--text-muted);">— dite em vez de digitar</span>
                         </div>
                     </div>
-                </div>
-                <div style="padding:8px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.7rem;color:var(--text-muted);">
-                    Essas técnicas são usadas internamente pelos times de <strong style="color:var(--green);">prompt engineering</strong> da OpenAI e Anthropic
+
+                    <!-- Card 3: Novo Chat para Novo Tópico -->
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;border-left:4px solid #3ECF8E;display:flex;flex-direction:column;gap:10px;">
+                        <div style="font-size:0.95rem;font-weight:600;color:#3ECF8E;">3. Novo Tópico = Novo Chat</div>
+                        <div style="font-size:0.78rem;color:var(--text-muted);">Gerencie o <strong>contexto</strong> — não misture assuntos no mesmo chat</div>
+                        <div style="font-size:0.72rem;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:10px 12px;border-radius:4px;font-family:'Courier New',monospace;line-height:1.6;">
+                            <span style="color:#e06666;">❌</span> Mesmo chat para tudo<br>
+                            <span style="color:#3ECF8E;">✅</span> Novo tópico → novo chat
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:8px 12px;margin-top:auto;cursor:default;">
+                            <i class="bi bi-plus-lg" style="color:var(--white);font-size:0.85rem;"></i>
+                            <span style="font-size:0.72rem;color:var(--white);font-weight:500;">Novo bate-papo</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1079,7 +1118,7 @@
                 <div class="two-col" style="grid-template-columns:3fr 2fr;">
                     <div>
                         <div class="col-title">Como funciona</div>
-                        <div class="llm-flow" style="padding:32px 24px;">
+                        <div class="llm-flow" style="padding:48px 24px 56px;">
                             <div class="llm-flow-node">
                                 <div class="llm-flow-box input" style="padding:14px 24px;font-size:0.95rem;"><i class="bi bi-box-arrow-in-right"></i> Input</div>
                                 <div class="llm-flow-label" style="font-size:0.75rem;">Seu prompt</div>
@@ -1092,6 +1131,10 @@
                                 <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:1px;height:10px;border-left:1px dashed var(--green);"></div>
                                 <div class="llm-flow-box llm" style="padding:18px 32px;font-size:1.05rem;"><i class="bi bi-cpu"></i> LLM</div>
                                 <div class="llm-flow-label" style="font-size:0.75rem;">Com contexto</div>
+                                <div style="position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:1px;height:10px;border-left:1px dashed var(--green);"></div>
+                                <div style="position:absolute;bottom:-36px;left:50%;transform:translateX(-50%);background:rgba(62,207,142,0.12);border:1px dashed var(--green);border-radius:6px;padding:4px 10px;font-size:0.65rem;color:var(--green);white-space:nowrap;display:flex;align-items:center;gap:4px;">
+                                    <i class="bi bi-database"></i> Base de Informações
+                                </div>
                             </div>
                             <div class="llm-flow-arrow" style="width:44px;"></div>
                             <div class="llm-flow-node">
@@ -1099,8 +1142,9 @@
                                 <div class="llm-flow-label" style="font-size:0.75rem;">Resposta</div>
                             </div>
                         </div>
-                        <div style="margin-top:16px;padding:10px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.75rem;color:var(--text-muted);">
-                            <strong style="color:var(--green);">System Prompt</strong> = instruções fixas que definem tom, contexto e regras da IA. É o que transforma um chat genérico em um assistente especializado.
+                        <div style="margin-top:16px;padding:10px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.75rem;color:var(--text-muted);display:flex;flex-direction:column;gap:4px;">
+                            <div><strong style="color:var(--green);">System Prompt</strong> = instruções fixas que definem tom, contexto e regras da IA.</div>
+                            <div><strong style="color:var(--green);">Base de Informações</strong> = documentos, FAQs e dados que a IA consulta para gerar respostas precisas.</div>
                         </div>
                     </div>
                     <div>
@@ -1115,11 +1159,6 @@
                                 <div class="logo-circle" style="width:48px;height:48px;">C<img src="logos/claude.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude"></div>
                                 <span class="logo-name">Claude</span>
                                 <span class="logo-price">Projects</span>
-                            </div>
-                            <div class="logo-card">
-                                <div class="logo-circle" style="width:48px;height:48px;">G<img src="logos/gemini.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gemini"></div>
-                                <span class="logo-name">Gemini</span>
-                                <span class="logo-price">Gems</span>
                             </div>
                         </div>
                     </div>
@@ -1157,26 +1196,26 @@
                             </div>
                             <div style="width:8px;height:8px;border-radius:50%;background:#2a9466;flex-shrink:0;"></div>
                         </div>
-                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #f0ad4e;display:flex;align-items:center;gap:10px;">
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #22805a;display:flex;align-items:center;gap:10px;">
                             <div style="flex:1;">
-                                <div style="font-size:0.7rem;font-weight:600;color:#f0ad4e;">4. Raciocínio</div>
+                                <div style="font-size:0.7rem;font-weight:600;color:#22805a;">4. Raciocínio</div>
                                 <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Peça que pense passo a passo antes de responder</div>
                             </div>
-                            <div style="width:8px;height:8px;border-radius:50%;background:#f0ad4e;flex-shrink:0;"></div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#22805a;flex-shrink:0;"></div>
                         </div>
-                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #5b9bd5;display:flex;align-items:center;gap:10px;">
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #1a6b4a;display:flex;align-items:center;gap:10px;">
                             <div style="flex:1;">
-                                <div style="font-size:0.7rem;font-weight:600;color:#5b9bd5;">5. Formato de Saída</div>
+                                <div style="font-size:0.7rem;font-weight:600;color:#1a6b4a;">5. Formato de Saída</div>
                                 <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Especifique: lista, tabela, parágrafos, JSON</div>
                             </div>
-                            <div style="width:8px;height:8px;border-radius:50%;background:#5b9bd5;flex-shrink:0;"></div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#1a6b4a;flex-shrink:0;"></div>
                         </div>
-                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #e06666;display:flex;align-items:center;gap:10px;">
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;border-left:4px solid #13573d;display:flex;align-items:center;gap:10px;">
                             <div style="flex:1;">
-                                <div style="font-size:0.7rem;font-weight:600;color:#e06666;">6. Condição de Parada</div>
+                                <div style="font-size:0.7rem;font-weight:600;color:#13573d;">6. Condição de Parada</div>
                                 <div style="font-size:0.62rem;color:var(--text-muted);margin-top:1px;">Defina limites: tamanho, escopo, quando parar</div>
                             </div>
-                            <div style="width:8px;height:8px;border-radius:50%;background:#e06666;flex-shrink:0;"></div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#13573d;flex-shrink:0;"></div>
                         </div>
                     </div>
 
@@ -1190,17 +1229,29 @@
                             <span style="color:var(--text-body);">Analise o fluxo de caixa anexo e recomende 3 cortes de custo.</span><br><br>
                             <span style="color:#2a9466;">// Contexto</span><br>
                             <span style="color:var(--text-body);">Empresa: varejo de roupas, 12 funcionários. R$180k/mês. Margem: 22%.</span><br><br>
-                            <span style="color:#f0ad4e;">// Raciocínio</span><br>
+                            <span style="color:#22805a;">// Raciocínio</span><br>
                             <span style="color:var(--text-body);">Explique a lógica de cada corte antes de recomendar.</span><br><br>
-                            <span style="color:#5b9bd5;">// Formato</span><br>
+                            <span style="color:#1a6b4a;">// Formato</span><br>
                             <span style="color:var(--text-body);">Tabela: Corte | Economia | Impacto</span><br><br>
-                            <span style="color:#e06666;">// Parada</span><br>
+                            <span style="color:#13573d;">// Parada</span><br>
                             <span style="color:var(--text-body);">Máximo 3 recomendações. Não sugira demissões.</span>
                         </div>
                     </div>
                 </div>
                 <div style="padding:8px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.7rem;color:var(--text-muted);">
                     Um bom prompt transforma uma IA genérica em um <strong style="color:var(--green);">especialista</strong> do seu negócio
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 6.5 - VÍDEO ==================== -->
+        <div class="slide" data-slide="6.5">
+            <div class="centered" style="position:relative;">
+                <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:24px;">
+                    <div style="font-size:1.2rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Demonstração</div>
+                    <div style="width:720px;height:405px;border-radius:12px;overflow:hidden;">
+                        <iframe width="720" height="405" src="https://www.youtube.com/embed/qvKLjp3RaUE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1220,8 +1271,8 @@
                                 <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Perplexity</span>
                             </div>
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/gemini.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gemini" style="border-radius:8px;"></div>
-                                <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Gemini</span>
+                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 509.641" style="width:100%;height:100%;border-radius:inherit;"><path d="M115.612 0h280.776C459.975 0 512 52.026 512 115.612v278.416c0 63.587-52.025 115.613-115.612 115.613H115.612C52.026 509.641 0 457.615 0 394.028V115.612C0 52.026 52.026 0 115.612 0z"/><path fill="#fff" d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></div>
+                                <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Grok</span>
                             </div>
                         </div>
                     </div>
@@ -1229,25 +1280,21 @@
                         <div style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-pencil"></i> Escrita</div>
                         <div style="display:flex;flex-direction:column;gap:8px;">
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/chatgpt.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="ChatGPT" style="border-radius:8px;"></div>
-                                <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">ChatGPT</span>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:8px;">
                                 <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/claude.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude" style="border-radius:8px;"></div>
                                 <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Claude</span>
                             </div>
                         </div>
                     </div>
                     <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px;">
-                        <div style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-palette"></i> Design</div>
+                        <div style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-easel"></i> Power Point</div>
                         <div style="display:flex;flex-direction:column;gap:8px;">
                             <div style="display:flex;align-items:center;gap:8px;">
                                 <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/gamma.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Gamma" style="border-radius:8px;"></div>
                                 <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Gamma</span>
                             </div>
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/napkin.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Napkin" style="border-radius:8px;"></div>
-                                <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Napkin</span>
+                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/lovable.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Lovable" style="border-radius:8px;"></div>
+                                <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Lovable</span>
                             </div>
                         </div>
                     </div>
@@ -1273,7 +1320,7 @@
                         <div style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-book"></i> Estudo</div>
                         <div style="display:flex;flex-direction:column;gap:8px;">
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/notebooklm.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="NotebookLM" style="border-radius:8px;"></div>
+                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;background:#fff;"><img src="logos/notebooklm.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="NotebookLM" style="border-radius:8px;"></div>
                                 <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">NotebookLM</span>
                             </div>
                         </div>
@@ -1282,8 +1329,8 @@
                         <div style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);"><i class="bi bi-code-slash"></i> Código/Apps</div>
                         <div style="display:flex;flex-direction:column;gap:8px;">
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/lovable.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Lovable" style="border-radius:8px;"></div>
-                                <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Lovable</span>
+                                <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" style="width:70%;height:70%;"><path d="M253.397 165.568H74.005c-17.088 0-31.189-13.995-31.338-31.083V31.083C42.667 13.739 56.96 0 74.283 0H221.76c17.643 0 31.637 14.037 31.637 31.083v134.485zM445.483 345.92H253.589V165.333h191.894c18.56 0 33.877 15.296 33.877 33.835v112.939c0 18.88-15.296 33.835-33.877 33.835v-.022zM221.76 512H74.283c-17.323 0-31.616-14.016-31.616-31.018V377.45c0-17.003 14.293-31.019 31.616-31.019h179.114v134.55c0 17.002-14.293 31.018-31.637 31.018z" fill="#fd5402" fill-rule="nonzero"/></svg></div>
+                                <span style="font-size:0.75rem;color:var(--text-body);font-weight:500;">Replit</span>
                             </div>
                             <div style="display:flex;align-items:center;gap:8px;">
                                 <div class="logo-circle" style="width:36px;height:36px;flex-shrink:0;border-radius:8px;"><img src="logos/cursor.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Cursor" style="border-radius:8px;"></div>
@@ -1385,128 +1432,97 @@
                                 <div class="logo-circle" style="width:48px;height:48px;">n<img src="logos/n8n.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="n8n"></div>
                                 <span class="logo-name">n8n</span>
                             </div>
-                            <div class="logo-card">
-                                <div class="logo-circle" style="width:48px;height:48px;">C<img src="logos/claudecode.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Claude Code"></div>
-                                <span class="logo-name">Claude Code</span>
-                            </div>
-                            <div class="logo-card">
-                                <div class="logo-circle" style="width:48px;height:48px;">F<img src="logos/flowise.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Flowise"></div>
-                                <span class="logo-name">Flowise</span>
-                            </div>
-                            <div class="logo-card">
-                                <div class="logo-circle" style="width:48px;height:48px;">R<img src="logos/relevance.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Relevance AI"></div>
-                                <span class="logo-name">Relevance AI</span>
-                            </div>
                         </div>
                     </div>
-                </div>
-                <div style="margin-top:12px;padding:10px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.75rem;color:var(--text-muted);">
-                    Hoje já é possível criar automações <strong style="color:var(--green);">sem código</strong> — a IA pode classificar, extrair ou direcionar o fluxo automaticamente.
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 9 - NÍVEL 3: BUILDING BLOCKS DE AUTOMAÇÃO ==================== -->
+        <!-- ==================== SLIDE 9 - DEMONSTRAÇÃO ==================== -->
         <div class="slide" data-slide="9">
-            <div class="slide-header level-header">Nível 3</div>
-            <div class="slide-content" style="padding-top:14px;padding-bottom:70px;gap:10px;">
-                <div class="slide-title" style="font-size:1.7rem;">Os building blocks de automação</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;flex:1;align-items:center;">
-                    <!-- Coluna Esquerda: Node visual simples -->
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-                        <div style="display:flex;align-items:center;gap:14px;">
-                            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-                                <div style="padding:14px 20px;border:1px solid rgba(62,207,142,0.3);border-radius:10px;background:rgba(62,207,142,0.04);">
-                                    <i class="bi bi-box-arrow-in-right" style="color:var(--green);font-size:1.3rem;"></i>
-                                </div>
-                                <div style="font-size:0.7rem;color:var(--green);font-weight:500;">Input</div>
-                            </div>
-                            <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.15);font-size:1rem;"></i>
-                            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-                                <div style="padding:18px 28px;background:rgba(62,207,142,0.1);border:2px solid var(--green);border-radius:12px;box-shadow:0 0 20px rgba(62,207,142,0.1);">
-                                    <i class="bi bi-cpu" style="color:var(--green);font-size:1.6rem;"></i>
-                                </div>
-                                <div style="font-size:0.75rem;color:var(--green);font-weight:600;">Node</div>
-                            </div>
-                            <i class="bi bi-arrow-right" style="color:rgba(255,255,255,0.15);font-size:1rem;"></i>
-                            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-                                <div style="padding:14px 20px;border:1px solid rgba(62,207,142,0.3);border-radius:10px;background:rgba(62,207,142,0.04);">
-                                    <i class="bi bi-box-arrow-right" style="color:var(--green);font-size:1.3rem;"></i>
-                                </div>
-                                <div style="font-size:0.7rem;color:var(--green);font-weight:500;">Output</div>
-                            </div>
-                        </div>
+            <div class="centered" style="position:relative;">
+                <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:24px;">
+                    <div style="font-size:1.2rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Demonstração</div>
+                    <div style="width:720px;height:405px;border-radius:12px;overflow:hidden;">
+                        <iframe width="720" height="405" src="https://www.youtube.com/embed/63XjExZYSbg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;"></iframe>
                     </div>
-
-                    <!-- Coluna Direita: Glossário unificado -->
-                    <div style="display:flex;flex-direction:column;gap:9px;">
-                        <div style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:2px;">Glossário</div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-lightning" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Gatilho</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">O evento que dispara tudo</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-gear" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Ação</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">A tarefa executada — enviar email, criar registro, mover arquivo</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-plug" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">API</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">A ponte entre dois sistemas</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-broadcast" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Webhook</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">Endereço que recebe avisos instantâneos de outro sistema</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-key" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Credenciais</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">A senha que a automação usa para acessar suas ferramentas</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-stars" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Nó de IA</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">O passo onde a IA analisa, classifica ou gera conteúdo</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-signpost-split" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Roteamento inteligente</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">A IA decide o caminho, não uma regra fixa</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-database" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Contexto</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">Informações anteriores que a IA usa para decidir melhor</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:8px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.7rem;color:var(--text-muted);">
-                    Com esses conceitos você monta <strong style="color:var(--green);">automações simples e com IA</strong>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 10 - NÍVEL 4: AGENTES ==================== -->
+        <!-- ==================== SLIDE 10 - NÍVEL 3 APROFUNDADO: CORE DE AUTOMAÇÃO ==================== -->
         <div class="slide" data-slide="10">
+            <div class="slide-header level-header">Nível 3</div>
+            <div class="slide-content" style="padding-top:16px;padding-bottom:70px;gap:10px;">
+                <div class="slide-title" style="font-size:1.7rem;">Conceitos Core de Automação</div>
+                <div class="slide-subtitle" style="font-size:0.85rem;margin-bottom:4px;">Os blocos fundamentais que compõem qualquer automação</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;align-items:start;">
+                    <!-- Coluna Esquerda: Conceitos -->
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-left:4px solid #3ECF8E;display:flex;align-items:center;gap:12px;">
+                            <div style="width:36px;height:36px;border-radius:8px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-lightning" style="color:var(--green);font-size:1rem;"></i></div>
+                            <div>
+                                <div style="font-size:0.85rem;font-weight:600;color:#3ECF8E;">Trigger (Gatilho)</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">O evento que inicia tudo — novo email, formulário, horário</div>
+                            </div>
+                        </div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-left:4px solid #35b87d;display:flex;align-items:center;gap:12px;">
+                            <div style="width:36px;height:36px;border-radius:8px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-gear" style="color:var(--green);font-size:1rem;"></i></div>
+                            <div>
+                                <div style="font-size:0.85rem;font-weight:600;color:#35b87d;">Action (Ação)</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">O que acontece depois — enviar email, criar registro, notificar</div>
+                            </div>
+                        </div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-left:4px solid #2a9466;display:flex;align-items:center;gap:12px;">
+                            <div style="width:36px;height:36px;border-radius:8px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-cpu" style="color:var(--green);font-size:1rem;"></i></div>
+                            <div>
+                                <div style="font-size:0.85rem;font-weight:600;color:#2a9466;">LLM Node</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">IA dentro do fluxo — classifica, resume, extrai dados, gera texto</div>
+                            </div>
+                        </div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-left:4px solid #22805a;display:flex;align-items:center;gap:12px;">
+                            <div style="width:36px;height:36px;border-radius:8px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-plug" style="color:var(--green);font-size:1rem;"></i></div>
+                            <div>
+                                <div style="font-size:0.85rem;font-weight:600;color:#22805a;">Integração</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">Conexão com sistemas externos — CRM, Slack, Google Sheets</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita: Diagrama visual -->
+                    <div style="display:flex;flex-direction:column;gap:14px;">
+                        <div style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);">Na prática</div>
+                        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:0;">
+                            <!-- Trigger -->
+                            <div style="padding:10px 22px;background:rgba(62,207,142,0.08);border:1px solid rgba(62,207,142,0.25);border-radius:8px;font-size:0.8rem;font-weight:600;color:var(--green);display:flex;align-items:center;gap:6px;">
+                                <i class="bi bi-lightning"></i> Trigger
+                            </div>
+                            <div style="width:2px;height:20px;background:rgba(62,207,142,0.3);"></div>
+                            <!-- LLM -->
+                            <div style="padding:10px 22px;background:rgba(62,207,142,0.12);border:2px solid var(--green);border-radius:8px;font-size:0.8rem;font-weight:600;color:var(--green);display:flex;align-items:center;gap:6px;box-shadow:0 0 16px rgba(62,207,142,0.15);">
+                                <i class="bi bi-cpu"></i> LLM processa
+                            </div>
+                            <div style="width:2px;height:20px;background:rgba(62,207,142,0.3);"></div>
+                            <!-- Ação -->
+                            <div style="padding:10px 22px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:0.8rem;font-weight:600;color:var(--text-body);display:flex;align-items:center;gap:6px;">
+                                <i class="bi bi-gear" style="color:var(--green);"></i> Ação
+                            </div>
+                            <div style="width:2px;height:20px;background:rgba(62,207,142,0.3);"></div>
+                            <!-- Integração -->
+                            <div style="padding:10px 22px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:0.8rem;font-weight:600;color:var(--text-body);display:flex;align-items:center;gap:6px;">
+                                <i class="bi bi-plug" style="color:var(--green);"></i> Integração
+                            </div>
+                        </div>
+                        <div style="padding:8px 14px;background:rgba(62,207,142,0.04);border:1px solid rgba(62,207,142,0.12);border-radius:8px;font-size:0.65rem;color:var(--text-muted);">
+                            Tudo isso roda <strong style="color:var(--green);">sem código</strong> — você monta visualmente arrastando blocos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 11 - NÍVEL 4: AGENTES ==================== -->
+        <div class="slide" data-slide="11">
             <div class="slide-header level-header">Nível 4</div>
             <div class="slide-content">
                 <div class="slide-title">Agentes Autônomos</div>
@@ -1572,32 +1588,13 @@
                                 </div>
                                 <span class="logo-name">OpenAI</span>
                             </div>
-                        </div>
-                        <div class="col-title" style="margin-top:16px;">Agentes prontos</div>
-                        <div class="logo-grid">
                             <div class="logo-card">
                                 <div class="logo-circle" style="width:48px;height:48px;">
-                                    C
-                                    <img src="logos/cursor.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Cursor">
+                                    n
+                                    <img src="logos/n8n.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="n8n">
                                 </div>
-                                <span class="logo-name">Cursor</span>
-                                <span class="logo-price">código</span>
-                            </div>
-                            <div class="logo-card">
-                                <div class="logo-circle" style="width:48px;height:48px;">
-                                    L
-                                    <img src="logos/lovable.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Lovable">
-                                </div>
-                                <span class="logo-name">Lovable</span>
-                                <span class="logo-price">apps</span>
-                            </div>
-                            <div class="logo-card">
-                                <div class="logo-circle" style="width:48px;height:48px;">
-                                    M
-                                    <img src="logos/manus.png" onerror="this.style.display='none';this.parentElement.classList.add('fallback')" alt="Manus">
-                                </div>
-                                <span class="logo-name">Manus</span>
-                                <span class="logo-price">geral</span>
+                                <span class="logo-name">n8n</span>
+                                <span class="logo-price">no-code</span>
                             </div>
                         </div>
                     </div>
@@ -1608,8 +1605,20 @@
             </div>
         </div>
 
-        <!-- ==================== SLIDE 11 - NÍVEL 4 APROFUNDADO: ANATOMIA DE UM AGENTE ==================== -->
-        <div class="slide" data-slide="11">
+        <!-- ==================== SLIDE 12 - DEMONSTRAÇÃO NÍVEL 4 ==================== -->
+        <div class="slide" data-slide="12">
+            <div class="centered" style="position:relative;">
+                <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:24px;">
+                    <div style="font-size:1.2rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Demonstração</div>
+                    <div style="width:720px;height:405px;border-radius:12px;overflow:hidden;">
+                        <iframe width="720" height="405" src="https://www.youtube.com/embed/0wXomV1MicA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 13 - NÍVEL 4 APROFUNDADO: ANATOMIA DE UM AGENTE ==================== -->
+        <div class="slide" data-slide="13">
             <div class="slide-header level-header">Nível 4</div>
             <div class="slide-content" style="padding-top:14px;padding-bottom:70px;gap:10px;">
                 <div class="slide-title" style="font-size:1.7rem;">Anatomia de um Agente de IA</div>
@@ -1651,9 +1660,16 @@
                         </div>
                     </div>
 
-                    <!-- Coluna Direita: Glossário -->
-                    <div style="display:flex;flex-direction:column;gap:10px;">
+                    <!-- Coluna Direita: Conceitos essenciais -->
+                    <div style="display:flex;flex-direction:column;gap:12px;">
                         <div style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:2px;">Conceitos-chave</div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-box-arrow-in-right" style="color:var(--green);font-size:0.8rem;"></i></div>
+                            <div>
+                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Input (Missão)</div>
+                                <div style="font-size:0.65rem;color:var(--text-muted);">A tarefa ou objetivo que você entrega ao agente</div>
+                            </div>
+                        </div>
                         <div style="display:flex;align-items:center;gap:10px;">
                             <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-cpu" style="color:var(--green);font-size:0.8rem;"></i></div>
                             <div>
@@ -1662,52 +1678,24 @@
                             </div>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-robot" style="color:var(--green);font-size:0.8rem;"></i></div>
+                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-file-earmark-text" style="color:var(--green);font-size:0.8rem;"></i></div>
                             <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Agentes vs. Automações</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">Automação segue regras fixas — agente decide sozinho</div>
+                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">System Prompt</div>
+                                <div style="font-size:0.65rem;color:var(--text-muted);">Instruções fixas que definem personalidade e regras do agente</div>
                             </div>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-chat-dots" style="color:var(--green);font-size:0.8rem;"></i></div>
+                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-database" style="color:var(--green);font-size:0.8rem;"></i></div>
                             <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Prompting eficaz</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">A qualidade da instrução define a qualidade do resultado</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-window-desktop" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">ChatGPT / Claude Desktop</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">Ferramentas prontas para usar no dia a dia</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-plug" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">MCP Servers</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">Protocolo que conecta a IA a ferramentas e dados externos</div>
+                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Memória</div>
+                                <div style="font-size:0.65rem;color:var(--text-muted);">Contexto que o agente mantém entre interações</div>
                             </div>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
                             <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-tools" style="color:var(--green);font-size:0.8rem;"></i></div>
                             <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Ferramentas (Tools)</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">As ações que o agente pode executar autonomamente</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-arrow-repeat" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Loop</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">O ciclo: raciocina → age → observa → repete</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:10px;">
-                            <div style="width:32px;height:32px;border-radius:7px;background:rgba(62,207,142,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-shield-check" style="color:var(--green);font-size:0.8rem;"></i></div>
-                            <div>
-                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Guardrails</div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);">Regras e limites que controlam até onde o agente vai</div>
+                                <div style="font-size:0.8rem;font-weight:600;color:var(--green);">Tools (Ferramentas)</div>
+                                <div style="font-size:0.65rem;color:var(--text-muted);">As ações que o agente pode executar — pesquisar, escrever, navegar</div>
                             </div>
                         </div>
                     </div>
@@ -1718,8 +1706,8 @@
             </div>
         </div>
 
-        <!-- ==================== SLIDE 12 - EVOLUÇÃO ==================== -->
-        <div class="slide" data-slide="12">
+        <!-- ==================== SLIDE 14 - EVOLUÇÃO ==================== -->
+        <div class="slide" data-slide="14">
             <div class="slide-content">
                 <div class="slide-title">A evolução da IA</div>
 
@@ -1800,7 +1788,7 @@
         <!-- ==================== NAVIGATION ==================== -->
         <div class="navigation">
             <button class="nav-btn" id="prevBtn">&#8592;</button>
-            <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">12</span></span>
+            <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">13</span></span>
             <button class="nav-btn" id="nextBtn">&#8594;</button>
         </div>
     </div>
@@ -1811,53 +1799,47 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const currentSlideSpan = document.getElementById('currentSlide');
-        const totalSlides = slides.length;
-        let currentSlide = 1;
+        const totalSlidesCount = slides.length;
+        let currentIndex = 0;
 
-        function showSlide(n) {
-            if (n < 1) n = 1;
-            if (n > totalSlides) n = totalSlides;
-            currentSlide = n;
+        document.getElementById('totalSlides').textContent = totalSlidesCount;
 
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-                if (parseInt(slide.dataset.slide) === currentSlide) {
-                    slide.classList.add('active');
-                }
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= totalSlidesCount) index = totalSlidesCount - 1;
+            currentIndex = index;
+
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === currentIndex);
             });
 
-            indicators.forEach(indicator => {
-                indicator.classList.remove('active');
-                if (parseInt(indicator.dataset.goto) === currentSlide) {
-                    indicator.classList.add('active');
-                }
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === currentIndex);
             });
 
-            currentSlideSpan.textContent = currentSlide;
-            prevBtn.disabled = currentSlide === 1;
-            nextBtn.disabled = currentSlide === totalSlides;
+            currentSlideSpan.textContent = currentIndex + 1;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlidesCount - 1;
         }
 
-        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+        prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
 
-        indicators.forEach(indicator => {
-            indicator.addEventListener('click', () => {
-                showSlide(parseInt(indicator.dataset.goto));
-            });
+        indicators.forEach((indicator, i) => {
+            indicator.addEventListener('click', () => showSlide(i));
         });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ') {
                 e.preventDefault();
-                showSlide(currentSlide + 1);
+                showSlide(currentIndex + 1);
             } else if (e.key === 'ArrowLeft') {
                 e.preventDefault();
-                showSlide(currentSlide - 1);
+                showSlide(currentIndex - 1);
             }
         });
 
-        showSlide(1);
+        showSlide(0);
     </script>
 </body>
 </html>

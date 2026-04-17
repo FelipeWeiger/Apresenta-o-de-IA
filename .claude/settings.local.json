@@ -8,7 +8,13 @@
       "Bash(do head -c 4 \"$f\")",
       "Bash(xxd:*)",
       "Bash(done)",
-      "Bash(powershell -Command:*)"
+      "Bash(powershell -Command:*)",
+      "WebFetch(domain:lobehub.com)",
+      "WebFetch(domain:uxwing.com)",
+      "WebFetch(domain:www.napkin.ai)",
+      "Bash(npx http-server:*)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:upload.wikimedia.org)"
     ]
   }
 }
